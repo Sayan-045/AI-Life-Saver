@@ -1,0 +1,6 @@
+{
+  "name": "Life Saver",
+  "description": "An AI-powered deadline rescue companion to help you stay on track and crush your goals.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

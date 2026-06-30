@@ -1,0 +1,64 @@
+{
+  "entities": {
+    "Task": {
+      "title": "Task",
+      "description": "A productivity task representing an urgent deadline or to-do item.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "notes": { "type": "string" },
+        "deadline": { "type": "string", "format": "date-time" },
+        "done": { "type": "boolean" },
+        "priority": { "type": "string", "enum": ["critical", "high", "medium", "low"] },
+        "estimatedMinutes": { "type": "integer" },
+        "category": { "type": "string" },
+        "userId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "done", "userId", "createdAt"]
+    },
+    "Habit": {
+      "title": "Habit",
+      "description": "A daily or weekly habit tracked for productivity.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "frequency": { "type": "string", "enum": ["daily", "weekly"] },
+        "streak": { "type": "integer" },
+        "completedToday": { "type": "boolean" },
+        "userId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "frequency", "streak", "completedToday", "userId", "createdAt"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "A message in the AI companion chat panel.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "text": { "type": "string" },
+        "sender": { "type": "string", "enum": ["user", "ai"] },
+        "userId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["text", "sender", "userId", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "User specific tasks and items with deadlines."
+    },
+    "/users/{userId}/habits/{habitId}": {
+      "schema": "Habit",
+      "description": "User specific habit tracking."
+    },
+    "/users/{userId}/chats/{chatId}": {
+      "schema": "ChatMessage",
+      "description": "User specific AI conversation messages."
+    }
+  }
+}
